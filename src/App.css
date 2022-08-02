@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.image-galary img {
+  border-radius: 5px;
+  box-shadow: rgba(9, 30, 66, 0.45) 0px 4px 8px -2px, rgba(9, 30, 66, 0.3) 0px 0px 0px 1px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 400px;
+}
+
+.image-galary img:hover {
+  box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+  transform: scale(1.035);
+}
+
+@media only screen and (max-width:500px){
+  .image-galary img {
+    width: 300px;
+  }
+  
+}
