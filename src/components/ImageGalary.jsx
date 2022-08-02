@@ -13,7 +13,6 @@ const ImageGalary = ({ API_KEY }) => {
             const res = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=programmer&image_type=photo`)
             const data = await res.json()
             setImagesData(data.hits)
-            console.log(API_KEY)
         }
         fetchData();
     },[])
