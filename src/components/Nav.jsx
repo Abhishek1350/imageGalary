@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button"
 
 const Nav = ({ fetchSearchedData }) => {
   const [input, setInput] = useState("")
+  // Searching images
   const searchPhoto = (e) => {
     e.preventDefault();
     fetchSearchedData(input);

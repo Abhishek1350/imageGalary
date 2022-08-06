@@ -4,21 +4,20 @@ import Nav from "../components/Nav"
 import Modal from 'react-bootstrap/Modal';
 
 const ImageGalary = ({ API_KEY }) => {
-    const [show, setShow] = useState(false);
-    const [imagesData, setImagesData] = useState(null)
-    const [imageData, setImageData] = useState(null)
+    const [show, setShow] = useState(false); //Modal state
+    const [imagesData, setImagesData] = useState(null) // All images state
+    const [imageData, setImageData] = useState(null) // One image state (Modal image)
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=programmer&image_type=photo`)
+            const res = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=programmer&image_type=photo&per_page=100`)
             const data = await res.json()
             setImagesData(data.hits)
-            console.log(API_KEY)
         }
         fetchData();
-    },[])
+    }, [])
 
-    // Function for showing modal
+    // Showing image in Modal
     const showBigImage = (e) => {
         setImageData(imagesData.filter((image) => {
             return e.id === image.id
@@ -26,8 +25,9 @@ const ImageGalary = ({ API_KEY }) => {
         setShow(true)
     }
 
+    // Searching images
     const fetchSearchedData = async (query) => {
-        const res = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${query}&image_type=photo`)
+        const res = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${query}&image_type=photo&per_page=100`)
         const data = await res.json()
         setImagesData(data.hits)
     }
@@ -36,8 +36,7 @@ const ImageGalary = ({ API_KEY }) => {
     if (!imagesData || imagesData.length === 0) {
         return (
             <Container className="py-3">
-                <h2 className="text-center text-secondary fs-2 fw-bold">Loading... Please Wait</h2>
-                <h3 className="text-center text-secondary fs-4 fw-bold">Or You Have Entered Wrong Input In Search</h3>
+                <h2 className="text-center text-danger fs-2 fw-bold">Something went wrong</h2>
                 <p className="text-center text-secondary fs-4 fw-bold">Try To Refresh</p>
             </Container>
         )
@@ -46,7 +45,7 @@ const ImageGalary = ({ API_KEY }) => {
     return (
         <>
             <Nav fetchSearchedData={fetchSearchedData} />
-            <Container fluid  style={{ backgroundColor: "ghostwhite" }}>
+            <Container fluid style={{ backgroundColor: "ghostwhite" }}>
                 <h2 className="text-primary text-center fw-bold fs-1 py-3 mb-3">Images</h2>
 
                 {/* Image Galary */}
